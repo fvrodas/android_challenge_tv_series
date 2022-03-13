@@ -2,12 +2,25 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="io.github.fvrodas.tvserieschallenge">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
+        android:name=".TvSeriesChallengeApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TVSeriesChallenge" />
+        android:theme="@style/Theme.TVSeriesChallenge">
+        <activity
+            android:name=".features.common.activities.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
 
 </manifest>

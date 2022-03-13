@@ -2,7 +2,8 @@ package io.github.fvrodas.core.common.network
 
 import io.github.fvrodas.core.BuildConfig
 import io.github.fvrodas.core.data.models.Person
-import io.github.fvrodas.core.data.models.Series
+import io.github.fvrodas.core.data.models.Show
+import io.github.fvrodas.core.data.models.ShowSearchResult
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -13,20 +14,20 @@ import retrofit2.http.Query
 
 interface TvMazeApi {
     @GET("/shows")
-    suspend fun getListOfSeriesByPageNumber(
+    suspend fun getListOfShowsByPageNumber(
         @Query("page") pageNumber:Long
-    ) : List<Series>
+    ) : List<Show>
 
     @GET("/search/shows")
-    suspend fun searchSeriesByName(
+    suspend fun searchShowsByName(
         @Query("q") name: String?
-    ): List<Series>
+    ): List<ShowSearchResult>
 
     @GET("/shows/{id}")
-    suspend fun getSeriesDetailById(
+    suspend fun getShowDetailsById(
         @Path("id") ID:Long,
         @Query("embed") embed: String = "episodes"
-    ): Series
+    ): Show
 
     @GET("/people")
     suspend fun getListOfPeopleByPageNumber(
@@ -39,10 +40,10 @@ interface TvMazeApi {
     ): List<Person>
 
     @GET("/people/{id}/castcredits")
-    suspend fun getPersonDetailById(
+    suspend fun getPersonDetailsById(
         @Path("id") ID:Long,
         @Query("embed") embed: String = "show"
-    ): Series
+    ): Show
 
     companion object {
         val services: TvMazeApi by lazy {
