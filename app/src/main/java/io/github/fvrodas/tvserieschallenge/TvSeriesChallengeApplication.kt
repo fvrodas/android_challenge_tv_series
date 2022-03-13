@@ -3,6 +3,7 @@ package io.github.fvrodas.tvserieschallenge
 import android.app.Application
 import io.github.fvrodas.core.coreModule
 import io.github.fvrodas.core.BuildConfig
+import io.github.fvrodas.tvserieschallenge.features.shows.viewmodels.ShowDetailsViewModel
 import io.github.fvrodas.tvserieschallenge.features.shows.viewmodels.ShowsViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -25,4 +26,5 @@ class TvSeriesChallengeApplication: Application() {
 
 val appModule = module {
     viewModel { ShowsViewModel(get(), get()) }
+    viewModel { ShowDetailsViewModel(get()) }
 }

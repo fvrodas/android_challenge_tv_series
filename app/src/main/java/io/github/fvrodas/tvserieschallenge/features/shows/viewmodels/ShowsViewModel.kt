@@ -8,6 +8,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class ShowsViewModel(
@@ -17,32 +18,35 @@ class ShowsViewModel(
 ) : ViewModel() {
 
     val showsUiState: MutableStateFlow<ShowsUiState> =
-        MutableStateFlow(ShowsUiState.Success(emptyList()))
+        MutableStateFlow(ShowsUiState.Loading)
 
     fun retrieveShowsByPageNumber(page: Long) {
         CoroutineScope(coroutineDispatcher).launch {
+            showsUiState.update { ShowsUiState.Loading }
             try {
                 val result = getListOfShowsByPageNumberUseCase(page).getOrThrow()
-                showsUiState.value = ShowsUiState.Success(result)
+                showsUiState.update { ShowsUiState.Success(result) }
             } catch (e: Exception) {
-                showsUiState.value = ShowsUiState.Failure(e.localizedMessage ?: "")
+                showsUiState.update { ShowsUiState.Failure(e.localizedMessage ?: "") }
             }
         }
     }
 
     fun searchShowByName(showName: String) {
         CoroutineScope(coroutineDispatcher).launch {
+            showsUiState.update { ShowsUiState.Loading }
             try {
                 val result = searchShowByNameUseCase(showName).getOrThrow()
-                showsUiState.value = ShowsUiState.Success(result)
+                showsUiState.update { ShowsUiState.Success(result) }
             } catch (e: Exception) {
-                showsUiState.value = ShowsUiState.Failure(e.localizedMessage ?: "")
+                showsUiState.update { ShowsUiState.Failure(e.localizedMessage ?: "") }
             }
         }
     }
 }
 
 sealed class ShowsUiState {
+    object Loading : ShowsUiState()
     class Success(val shows: List<ShowEntity>) : ShowsUiState()
     class Failure(val error: String) : ShowsUiState()
 }

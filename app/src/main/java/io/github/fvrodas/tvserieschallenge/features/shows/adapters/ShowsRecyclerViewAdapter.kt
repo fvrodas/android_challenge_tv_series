@@ -11,7 +11,8 @@ import io.github.fvrodas.core.domain.entities.ShowEntity
 import io.github.fvrodas.tvserieschallenge.R
 import io.github.fvrodas.tvserieschallenge.databinding.ItemShowBinding
 
-class ShowsRecyclerViewAdapter : ListAdapter<ShowEntity, ShowViewHolder>(ShowsDiffUtils()) {
+class ShowsRecyclerViewAdapter(private val listener: ShowsRecyclerViewAdapterListener) :
+    ListAdapter<ShowEntity, ShowViewHolder>(ShowsDiffUtils()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShowViewHolder {
         return ShowViewHolder.create(parent)
@@ -26,6 +27,8 @@ class ShowsRecyclerViewAdapter : ListAdapter<ShowEntity, ShowViewHolder>(ShowsDi
                 viewBinding.showPosterImageview.setImageResource(R.drawable.ic_shows)
             }
             viewBinding.showTitleTextview.text = item.name
+            itemView.setOnClickListener { listener.onItemPressed(item) }
+            itemView.setOnLongClickListener { listener.onItemLongPressed(item) }
         }
     }
 
@@ -33,6 +36,13 @@ class ShowsRecyclerViewAdapter : ListAdapter<ShowEntity, ShowViewHolder>(ShowsDi
         super.onViewRecycled(holder)
         with(holder) {
             Glide.with(itemView).clear(viewBinding.showPosterImageview)
+        }
+    }
+
+    companion object {
+        interface ShowsRecyclerViewAdapterListener {
+            fun onItemPressed(show: ShowEntity)
+            fun onItemLongPressed(show: ShowEntity): Boolean
         }
     }
 }

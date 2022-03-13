@@ -25,7 +25,7 @@ class GetShowDetailsByIdUseCaseTest {
         poster = "https://testurl.com/-1/image.jpg",
         posterHQ = "https://testurl.com/-1/image.jpg",
         summary = "Test Summary",
-        genre = listOf("horror", "scifi"),
+        genres = listOf("horror", "scifi"),
         status = "ended",
         schedule = Schedule(time = "16:00", days = listOf("friday")),
         null

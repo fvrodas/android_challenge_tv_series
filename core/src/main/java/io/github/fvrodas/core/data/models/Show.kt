@@ -37,12 +37,7 @@ data class Show(
         this.genres,
         this.status,
         this.schedule,
-        this.listOfEpisodes?.map { it as EpisodeEntity }
+        this._embedded?.episodes?.map { it.asEntity() }
     )
-
-    private val listOfEpisodes: List<Episode>?
-        get() {
-            return (this._embedded?.get("episodes") as List<Any?>?)?.map { it as Episode }
-        }
 
 }
