@@ -11,6 +11,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
+const val PAGE_NONE : Long = -1
+
 class ShowsViewModel(
     private val getListOfShowsByPageNumberUseCase: GetListOfShowsByPageNumberUseCase,
     private val searchShowByNameUseCase: SearchShowByNameUseCase,
@@ -20,12 +22,18 @@ class ShowsViewModel(
     val showsUiState: MutableStateFlow<ShowsUiState> =
         MutableStateFlow(ShowsUiState.Loading)
 
-    fun retrieveShowsByPageNumber(page: Long) {
+    private var currentPage: Long = 0
+
+    init {
+        retrieveCurrentPage()
+    }
+
+    private fun retrieveShowsByPageNumber(page: Long) {
         CoroutineScope(coroutineDispatcher).launch {
             showsUiState.update { ShowsUiState.Loading }
             try {
                 val result = getListOfShowsByPageNumberUseCase(page).getOrThrow()
-                showsUiState.update { ShowsUiState.Success(result) }
+                showsUiState.update { ShowsUiState.Success(result, page) }
             } catch (e: Exception) {
                 showsUiState.update { ShowsUiState.Failure(e.localizedMessage ?: "") }
             }
@@ -37,16 +45,32 @@ class ShowsViewModel(
             showsUiState.update { ShowsUiState.Loading }
             try {
                 val result = searchShowByNameUseCase(showName).getOrThrow()
-                showsUiState.update { ShowsUiState.Success(result) }
+                showsUiState.update { ShowsUiState.Success(result, PAGE_NONE) }
             } catch (e: Exception) {
                 showsUiState.update { ShowsUiState.Failure(e.localizedMessage ?: "") }
             }
         }
     }
+
+    fun retrieveCurrentPage() {
+        retrieveShowsByPageNumber(currentPage)
+    }
+
+    fun retrievePreviousPage() {
+        if (currentPage - 1 >= 0) {
+            currentPage--
+            retrieveShowsByPageNumber(currentPage)
+        }
+    }
+
+    fun retrieveNextPage() {
+        currentPage++
+        retrieveShowsByPageNumber(currentPage)
+    }
 }
 
 sealed class ShowsUiState {
     object Loading : ShowsUiState()
-    class Success(val shows: List<ShowEntity>) : ShowsUiState()
+    class Success(val shows: List<ShowEntity>, val pageNumber: Long) : ShowsUiState()
     class Failure(val error: String) : ShowsUiState()
 }

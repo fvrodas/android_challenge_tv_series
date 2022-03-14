@@ -1,13 +1,33 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <style name="Theme.TVSeriesChallenge" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/teal_tv_maze</item>
+        <item name="colorPrimary">@color/darker_teal</item>
         <item name="colorPrimaryVariant">@color/darker_teal</item>
         <item name="colorOnPrimary">@color/lighter_gray</item>
         <item name="colorSecondary">@color/lighter_gray</item>
         <item name="colorSecondaryVariant">@color/darker_gray</item>
         <item name="colorOnSecondary">@color/lighter_gray</item>
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="backgroundColor">@color/darker_gray</item>
+        <item name="bottomNavigationStyle">@style/Theme.TVSeriesChallenge.BottomNavigationView
+        </item>
+    </style>
+
+    <style name="Theme.TVSeriesChallenge.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/teal_tv_maze</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_shows</item>
+        <item name="windowSplashScreenAnimationDuration">200</item>
+        <item name="postSplashScreenTheme">@style/Theme.TVSeriesChallenge</item>
     </style>
 
     <style name="Theme.TVSeriesChallenge.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView.Colored" />
+
+    <style name="Theme.TVSeriesChallenge.EpisodeTitle">
+        <item name="android:textColor">@color/lighter_teal</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Theme.TVSeriesChallenge.SeasonTitle">
+        <item name="android:textColor">@color/darker_gray</item>
+        <item name="android:background">@color/lighter_teal</item>
+    </style>
 </resources>

@@ -11,14 +11,18 @@ import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import io.github.fvrodas.core.domain.entities.ShowEntity
+import io.github.fvrodas.tvserieschallenge.R
 import io.github.fvrodas.tvserieschallenge.databinding.ShowsFragmentBinding
 import io.github.fvrodas.tvserieschallenge.features.shows.activities.ShowDetailsActivity
 import io.github.fvrodas.tvserieschallenge.features.shows.adapters.ShowsRecyclerViewAdapter
+import io.github.fvrodas.tvserieschallenge.features.shows.viewmodels.PAGE_NONE
 import io.github.fvrodas.tvserieschallenge.features.shows.viewmodels.ShowsUiState
 import io.github.fvrodas.tvserieschallenge.features.shows.viewmodels.ShowsViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
+private const val SPAN_COUNT: Int = 3
 
 class ShowsFragment : Fragment() {
 
@@ -57,7 +61,7 @@ class ShowsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val layoutManager =
-            GridLayoutManager(requireContext(), 3, GridLayoutManager.VERTICAL, false)
+            GridLayoutManager(requireContext(), SPAN_COUNT, GridLayoutManager.VERTICAL, false)
 
         viewBinding.showsRecyclerView.layoutManager = layoutManager
         viewBinding.showsRecyclerView.adapter = showRecyclerViewAdapter
@@ -68,6 +72,10 @@ class ShowsFragment : Fragment() {
                     is ShowsUiState.Loading -> viewBinding.progressIndicator.visibility =
                         View.VISIBLE
                     is ShowsUiState.Success -> {
+                        viewBinding.pagerConstraintLayout.visibility =
+                            if (it.pageNumber == PAGE_NONE) View.GONE else View.VISIBLE
+                        viewBinding.currentPageTextView.text =
+                            getString(R.string.page_template, (it.pageNumber + 1))
                         viewBinding.progressIndicator.visibility = View.GONE
                         showRecyclerViewAdapter.submitList(it.shows)
                     }
@@ -80,7 +88,8 @@ class ShowsFragment : Fragment() {
             }
         }
 
-        viewBinding.includedToolbar.searchView.queryHint = "Search Shows"
+        viewBinding.includedToolbar.searchView.queryHint =
+            resources.getString(R.string.shows_query_hint)
 
         viewBinding.includedToolbar.searchView.setOnQueryTextListener(object :
             SearchView.OnQueryTextListener {
@@ -91,13 +100,19 @@ class ShowsFragment : Fragment() {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (newText.isNullOrEmpty()) {
-                    viewModel.retrieveShowsByPageNumber(0)
+                    viewModel.retrieveCurrentPage()
                 }
                 return true
             }
         })
 
-        viewModel.retrieveShowsByPageNumber(0)
+        viewBinding.previousButton.setOnClickListener {
+            viewModel.retrievePreviousPage()
+        }
+
+        viewBinding.nextButton.setOnClickListener {
+            viewModel.retrieveNextPage()
+        }
     }
 
 }

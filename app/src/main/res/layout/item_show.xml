@@ -2,9 +2,8 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_margin="8dp"
-    android:elevation="5dp"
-    app:cardCornerRadius="4dp"
+    android:layout_margin="@dimen/half_margin"
+    app:cardCornerRadius="@dimen/quarter_margin"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
@@ -13,8 +12,8 @@
         android:layout_height="match_parent">
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/show_poster_imageview"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
+            android:layout_width="@dimen/show_item_poster_size"
+            android:layout_height="@dimen/show_item_poster_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -24,7 +23,7 @@
             android:id="@+id/show_title_linearlayout"
             android:orientation="vertical"
             android:layout_width="0dp"
-            android:padding="8dp"
+            android:padding="@dimen/half_margin"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/darker_teal"
             app:layout_constraintBottom_toBottomOf="parent"

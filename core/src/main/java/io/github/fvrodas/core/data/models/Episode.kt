@@ -12,7 +12,7 @@ data class Episode (
     val airdate: String,
     val airtime: String,
     val airstamp: String,
-    val runtime: Long,
+    val runtime: Long?,
     val rating: Rating,
     val image: Image?,
     val summary: String
