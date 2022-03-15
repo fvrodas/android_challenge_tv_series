@@ -80,13 +80,24 @@ class ShowDetailsActivity : AppCompatActivity() {
                             g.forEach { s ->
                                 spannableStringBuilder.append(
                                     "\u0020$s\u0020",
-                                    BackgroundColorSpan(resources.getColor(R.color.teal_tv_maze, null)),
+                                    BackgroundColorSpan(
+                                        resources.getColor(
+                                            R.color.teal_tv_maze,
+                                            null
+                                        )
+                                    ),
                                     Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
                                 )
                                 spannableStringBuilder.append("\u0020\u0020")
                             }
                             viewBinding.genresTextview.text = spannableStringBuilder.toSpannable()
                         }
+
+                        viewBinding.addToFavoritesFab.setImageResource(if (it.isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_empty)
+
+                        viewBinding.addToFavoritesFab.isClickable = !it.isFavorite
+
+                        viewBinding.addToFavoritesFab.visibility = View.VISIBLE
 
                         it.shows.schedule?.let { sc ->
                             var days = sc.days.fold(initial = "", operation = { acc, s ->
@@ -95,7 +106,11 @@ class ShowDetailsActivity : AppCompatActivity() {
                             days += "at ${sc.time}"
                             viewBinding.scheduleTextview.text = days
                         }
-                        episodesRecyclerViewAdapter.submitList(it.shows.episodes)
+
+                        it.shows.episodes?.let { episodes ->
+                            episodesRecyclerViewAdapter.submitList(episodes)
+                        }
+
                     }
                     is ShowDetailsUiState.Message -> {
                         viewBinding.progressIndicator.visibility =
@@ -111,7 +126,7 @@ class ShowDetailsActivity : AppCompatActivity() {
             viewModel.addShowToFavorites(show)
         }
 
-        viewModel.retrieveShowDetailsById(show.id!!)
+        viewModel.retrieveShowDetailsById(show.id)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

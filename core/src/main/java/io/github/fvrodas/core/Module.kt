@@ -20,4 +20,5 @@ val coreModule = module {
     single { AddFavoriteShowUseCase(get()) }
     single { DeleteFavoriteShowUseCase(get()) }
     single { GetListOfFavoriteShowsUseCase(get()) }
+    single { IsFavoriteShowUseCase(get()) }
 }

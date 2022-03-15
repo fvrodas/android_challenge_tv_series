@@ -6,4 +6,5 @@ interface IFavoriteShowsRepository {
     suspend fun getFavoriteShows() : Result<List<ShowEntity>>
     suspend fun addFavoriteShow(show: ShowEntity) : Result<ShowEntity>
     suspend fun deleteFavoriteShow(show: ShowEntity) : Result<ShowEntity>
+    suspend fun isFavorite(show: ShowEntity) : Result<Boolean>
 }

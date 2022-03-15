@@ -43,4 +43,15 @@ class FavoriteShowsRepository(
         }
     }
 
+    override suspend fun isFavorite(show: ShowEntity): Result<Boolean> {
+        return withContext(coroutineDispatcher) {
+            try {
+                val count = localDataSource.isFavorite(show.id)
+                return@withContext Result.success(count > 0)
+            } catch (e: Exception) {
+                return@withContext Result.failure(e)
+            }
+        }
+    }
+
 }

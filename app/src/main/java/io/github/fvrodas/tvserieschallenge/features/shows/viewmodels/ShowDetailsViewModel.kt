@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import io.github.fvrodas.core.domain.entities.ShowEntity
 import io.github.fvrodas.core.domain.usecases.AddFavoriteShowUseCase
 import io.github.fvrodas.core.domain.usecases.GetShowDetailsByIdUseCase
+import io.github.fvrodas.core.domain.usecases.IsFavoriteShowUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -14,6 +15,7 @@ import kotlinx.coroutines.launch
 class ShowDetailsViewModel(
     private val getShowDetailsByIdUseCase: GetShowDetailsByIdUseCase,
     private val addFavoriteShowUseCase: AddFavoriteShowUseCase,
+    private val isFavoriteShowUseCase: IsFavoriteShowUseCase,
     private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ViewModel() {
 
@@ -25,7 +27,8 @@ class ShowDetailsViewModel(
             showDetailsUiState.update { ShowDetailsUiState.Loading }
             try {
                 val result = getShowDetailsByIdUseCase(showId).getOrThrow()
-                showDetailsUiState.update { ShowDetailsUiState.Success(result) }
+                val isFavorite = isFavoriteShowUseCase(result).getOrThrow()
+                showDetailsUiState.update { ShowDetailsUiState.Success(result, isFavorite) }
             } catch (e: Exception) {
                 showDetailsUiState.update { ShowDetailsUiState.Message(e.localizedMessage ?: "") }
             }
@@ -36,8 +39,9 @@ class ShowDetailsViewModel(
         CoroutineScope(coroutineDispatcher).launch {
             showDetailsUiState.update { ShowDetailsUiState.Loading }
             try {
-                addFavoriteShowUseCase(show).getOrThrow()
-                showDetailsUiState.update { ShowDetailsUiState.Message("Added to Favorites") }
+                val result = addFavoriteShowUseCase(show).getOrThrow()
+                val isFavorite = isFavoriteShowUseCase(result).getOrThrow()
+                showDetailsUiState.update { ShowDetailsUiState.Success(result, isFavorite) }
             } catch (e: Exception) {
                 showDetailsUiState.update { ShowDetailsUiState.Message(e.localizedMessage ?: "") }
             }
@@ -47,6 +51,6 @@ class ShowDetailsViewModel(
 
 sealed class ShowDetailsUiState {
     object Loading : ShowDetailsUiState()
-    class Success(val shows: ShowEntity) : ShowDetailsUiState()
+    class Success(val shows: ShowEntity, val isFavorite: Boolean) : ShowDetailsUiState()
     class Message(val message: String) : ShowDetailsUiState()
 }

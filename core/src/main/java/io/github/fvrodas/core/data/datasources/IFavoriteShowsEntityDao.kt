@@ -17,4 +17,7 @@ interface IFavoriteShowsEntityDao {
 
     @Delete
     fun delete(story: ShowEntity)
+
+    @Query("SELECT COUNT(*) FROM ShowEntity WHERE id == :showId")
+    fun isFavorite(showId: Long) : Long
 }

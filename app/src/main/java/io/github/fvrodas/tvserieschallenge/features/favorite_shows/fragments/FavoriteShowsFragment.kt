@@ -71,7 +71,7 @@ class FavoriteShowsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewBinding.favoriteShowsToolbar.title = "Favorite Shows"
+        viewBinding.favoriteShowsToolbar.title = getString(R.string.favorite_shows_title)
 
         val layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)

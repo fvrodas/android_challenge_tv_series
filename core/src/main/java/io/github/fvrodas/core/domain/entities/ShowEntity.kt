@@ -9,7 +9,7 @@ import java.io.Serializable
 
 @Entity
 data class ShowEntity(
-    @PrimaryKey val id: Long?,
+    @PrimaryKey val id: Long,
     @ColumnInfo(name = "name") val name: String?,
     @ColumnInfo(name = "url") val url: String?,
     @ColumnInfo(name = "poster") val poster: String?,
@@ -22,7 +22,7 @@ data class ShowEntity(
 ) : Serializable {
 
     constructor(
-        id: Long?,
+        id: Long,
         name: String?,
         url: String?,
         poster: String?,

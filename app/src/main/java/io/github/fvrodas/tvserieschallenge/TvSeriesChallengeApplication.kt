@@ -27,6 +27,6 @@ class TvSeriesChallengeApplication : Application() {
 
 val appModule = module {
     viewModel { ShowsViewModel(get(), get()) }
-    viewModel { ShowDetailsViewModel(get(), get()) }
+    viewModel { ShowDetailsViewModel(get(), get(), get()) }
     viewModel { FavoriteShowsViewModel(get(), get()) }
 }
