@@ -8,4 +8,9 @@
     <string name="season_template">Season %d</string>
     <string name="page_template">Page %d</string>
     <string name="summary_not_available">Summary not available</string>
+    <string name="alert_delete_title">Delete Favorite Show</string>
+    <string name="alert_delete_message">This item will be deleted. Do you want to delete it?</string>
+    <string name="main_menu_favorites">Favorites</string>
+    <string name="add_to_favorites_fab_description">Add to Favorites</string>
+    <string name="favorite_shows_title">My Favorite Shows</string>
 </resources>

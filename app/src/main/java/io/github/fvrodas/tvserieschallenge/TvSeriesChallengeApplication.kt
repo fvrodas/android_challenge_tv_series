@@ -3,6 +3,7 @@ package io.github.fvrodas.tvserieschallenge
 import android.app.Application
 import io.github.fvrodas.core.coreModule
 import io.github.fvrodas.core.BuildConfig
+import io.github.fvrodas.tvserieschallenge.features.favorite_shows.viewmodels.FavoriteShowsViewModel
 import io.github.fvrodas.tvserieschallenge.features.shows.viewmodels.ShowDetailsViewModel
 import io.github.fvrodas.tvserieschallenge.features.shows.viewmodels.ShowsViewModel
 import org.koin.android.ext.koin.androidContext
@@ -12,7 +13,7 @@ import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 import org.koin.dsl.module
 
-class TvSeriesChallengeApplication: Application() {
+class TvSeriesChallengeApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
@@ -26,5 +27,6 @@ class TvSeriesChallengeApplication: Application() {
 
 val appModule = module {
     viewModel { ShowsViewModel(get(), get()) }
-    viewModel { ShowDetailsViewModel(get()) }
+    viewModel { ShowDetailsViewModel(get(), get(), get()) }
+    viewModel { FavoriteShowsViewModel(get(), get()) }
 }

@@ -31,6 +31,12 @@
 
     <style name="Theme.TVSeriesChallenge.SeasonTitle">
         <item name="android:textColor">@color/lighter_gray</item>
+        <item name="android:background">@color/teal_tv_maze</item>
+    </style>
+
+    <style name="Theme.TVSeriesChallenge.LetterTitle">
+        <item name="android:textColor">@color/darker_gray</item>
         <item name="android:background">@color/lighter_teal</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
     </style>
 </resources>

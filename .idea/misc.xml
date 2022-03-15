@@ -3,15 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/gradient_view_background.xml" value="0.1395" />
         <entry key="app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.321" />
         <entry key="app/src/main/res/drawable/navigation_item_color.xml" value="0.1335" />
         <entry key="app/src/main/res/drawable/page_view_background.xml" value="0.2435" />
         <entry key="app/src/main/res/drawable/search_view_background.xml" value="0.3225" />
+        <entry key="app/src/main/res/layout/activity_favorite_shows.xml" value="0.3234375" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.32395833333333335" />
         <entry key="app/src/main/res/layout/activity_show_details.xml" value="0.2753292806484296" />
         <entry key="app/src/main/res/layout/fragment_episode_bottom_sheet.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_favorite_shows.xml" value="0.25501432664756446" />
         <entry key="app/src/main/res/layout/item_episode.xml" value="0.2753292806484296" />
+        <entry key="app/src/main/res/layout/item_episode_alt.xml" value="0.3234375" />
         <entry key="app/src/main/res/layout/item_show.xml" value="0.2957427536231884" />
+        <entry key="app/src/main/res/layout/item_show_alt.xml" value="0.33" />
         <entry key="app/src/main/res/layout/search_toolbar.xml" value="0.33" />
         <entry key="app/src/main/res/layout/shows_fragment.xml" value="0.1" />
         <entry key="app/src/main/res/layout/shows_fragment_toolbar.xml" value="0.2753292806484296" />
@@ -22,7 +27,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

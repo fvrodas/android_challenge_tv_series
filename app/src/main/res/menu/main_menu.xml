@@ -9,6 +9,10 @@
         android:icon="@drawable/ic_people"
         android:title="@string/main_menu_people" />
     <item
+        android:id="@+id/action_menu_favorite"
+        android:icon="@drawable/ic_favorite"
+        android:title="@string/main_menu_favorites" />
+    <item
         android:id="@+id/action_menu_settings"
         android:icon="@drawable/ic_settings"
         android:title="@string/main_menu_settings" />
