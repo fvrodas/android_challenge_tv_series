@@ -12,6 +12,17 @@
         </item>
     </style>
 
+    <style name="Theme.TVSeriesChallenge.ActionBar" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="colorPrimary">@color/teal_tv_maze</item>
+        <item name="colorPrimaryVariant">@color/darker_teal</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/lighter_gray</item>
+        <item name="colorSecondaryVariant">@color/darker_gray</item>
+        <item name="colorOnSecondary">@color/lighter_teal</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="backgroundColor">@color/lighter_gray</item>
+    </style>
+
     <style name="Theme.TVSeriesChallenge.Starting" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/teal_tv_maze</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_shows</item>
@@ -31,6 +42,12 @@
 
     <style name="Theme.TVSeriesChallenge.SeasonTitle">
         <item name="android:textColor">@color/lighter_gray</item>
+        <item name="android:background">@color/teal_tv_maze</item>
+    </style>
+
+    <style name="Theme.TVSeriesChallenge.LetterTitle">
+        <item name="android:textColor">@color/darker_gray</item>
         <item name="android:background">@color/lighter_teal</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
     </style>
 </resources>

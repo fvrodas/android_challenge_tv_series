@@ -1,23 +1,36 @@
 package io.github.fvrodas.tvserieschallenge.features.common.activities
 
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import io.github.fvrodas.tvserieschallenge.R
 import io.github.fvrodas.tvserieschallenge.databinding.ActivityMainBinding
+import io.github.fvrodas.tvserieschallenge.features.favorite_shows.fragments.FavoriteShowsFragment
 import io.github.fvrodas.tvserieschallenge.features.shows.fragments.ShowsFragment
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var viewBinding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        val splashScreen = installSplashScreen()
+        installSplashScreen()
         super.onCreate(savedInstanceState)
-        val viewBinding = ActivityMainBinding.inflate(layoutInflater, null, false)
+        viewBinding = ActivityMainBinding.inflate(layoutInflater, null, false)
 
         viewBinding.mainBottomNavigationView.setOnItemSelectedListener {
-            when(it.itemId) {
+            when (it.itemId) {
                 R.id.action_menu_shows -> {
                     supportFragmentManager.beginTransaction().apply {
                         replace(viewBinding.fragmentContainerView.id, ShowsFragment.newInstance())
+                        commit()
+                    }
+                }
+                R.id.action_menu_favorite -> {
+                    supportFragmentManager.beginTransaction().apply {
+                        replace(
+                            viewBinding.fragmentContainerView.id,
+                            FavoriteShowsFragment.newInstance()
+                        )
                         commit()
                     }
                 }
@@ -28,5 +41,10 @@ class MainActivity : AppCompatActivity() {
         viewBinding.mainBottomNavigationView.selectedItemId = R.id.action_menu_shows
 
         setContentView(viewBinding.root)
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        viewBinding.mainBottomNavigationView.selectedItemId = R.id.action_menu_shows
     }
 }
