@@ -25,10 +25,6 @@
             android:name=".features.shows.activities.ShowDetailsActivity"
             android:exported="false"
             android:theme="@style/Theme.TVSeriesChallenge" />
-        <activity
-            android:name=".features.favorite_shows.fragments.FavoriteShowsActivity"
-            android:exported="false"
-            android:theme="@style/Theme.TVSeriesChallenge.ActionBar"/>
     </application>
 
 </manifest>
