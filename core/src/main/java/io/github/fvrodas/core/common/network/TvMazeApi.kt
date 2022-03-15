@@ -2,6 +2,7 @@ package io.github.fvrodas.core.common.network
 
 import io.github.fvrodas.core.BuildConfig
 import io.github.fvrodas.core.data.models.Person
+import io.github.fvrodas.core.data.models.PersonSearchResult
 import io.github.fvrodas.core.data.models.Show
 import io.github.fvrodas.core.data.models.ShowSearchResult
 import okhttp3.OkHttpClient
@@ -37,13 +38,13 @@ interface TvMazeApi {
     @GET("/search/people")
     suspend fun searchPeopleByName(
         @Query("q") name: String?
-    ): List<Person>
+    ): List<PersonSearchResult>
 
     @GET("/people/{id}/castcredits")
     suspend fun getPersonDetailsById(
         @Path("id") ID:Long,
         @Query("embed") embed: String = "show"
-    ): Show
+    ): Person
 
     companion object {
         val services: TvMazeApi by lazy {

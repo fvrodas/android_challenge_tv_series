@@ -1,7 +1,6 @@
 package io.github.fvrodas.tvserieschallenge.features.shows.activities
 
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableStringBuilder
@@ -9,6 +8,7 @@ import android.text.style.BackgroundColorSpan
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
 import androidx.core.text.toSpannable
 import androidx.lifecycle.lifecycleScope

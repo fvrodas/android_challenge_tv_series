@@ -1,6 +1,5 @@
 package io.github.fvrodas.core.data.models
 
-import io.github.fvrodas.core.domain.entities.EpisodeEntity
 import io.github.fvrodas.core.domain.entities.ShowEntity
 
 data class Show(

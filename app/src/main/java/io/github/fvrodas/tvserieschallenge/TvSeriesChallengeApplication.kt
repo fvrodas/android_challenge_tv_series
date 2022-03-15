@@ -1,8 +1,8 @@
 package io.github.fvrodas.tvserieschallenge
 
 import android.app.Application
-import io.github.fvrodas.core.coreModule
 import io.github.fvrodas.core.BuildConfig
+import io.github.fvrodas.core.coreModule
 import io.github.fvrodas.tvserieschallenge.features.favorite_shows.viewmodels.FavoriteShowsViewModel
 import io.github.fvrodas.tvserieschallenge.features.shows.viewmodels.ShowDetailsViewModel
 import io.github.fvrodas.tvserieschallenge.features.shows.viewmodels.ShowsViewModel

@@ -1,5 +1,5 @@
 package io.github.fvrodas.core.data.models
 
-data class ShowSearchResult (
-    val show: Show
+data class PersonSearchResult (
+    val person: Person
 ) : SearchResult(0.0)

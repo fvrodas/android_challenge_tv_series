@@ -4,14 +4,12 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import io.github.fvrodas.core.domain.entities.ShowEntity
 import io.github.fvrodas.tvserieschallenge.R
 import io.github.fvrodas.tvserieschallenge.databinding.ItemShowAltBinding
-import io.github.fvrodas.tvserieschallenge.databinding.ItemShowBinding
 import io.github.fvrodas.tvserieschallenge.features.shows.adapters.ShowsDiffUtils
 
 class FavoriteShowsRecyclerViewAdapter(private val listener: ShowsRecyclerViewAdapterListener) :
