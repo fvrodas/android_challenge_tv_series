@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="app_bar_height">350dp</dimen>
+    <dimen name="normal_margin">16dp</dimen>
+    <dimen name="button_height">36dp</dimen>
+    <dimen name="quarter_margin">4dp</dimen>
+    <dimen name="episode_small_imageview_width">96dp</dimen>
+    <dimen name="show_item_poster_size">180dp</dimen>
+    <dimen name="half_margin">8dp</dimen>
+</resources>
