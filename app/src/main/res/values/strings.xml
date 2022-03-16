@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TV Series Challenge</string>
+    <string name="app_name">TV Series App</string>
     <string name="app_version_name">1.0.0</string>
     <string name="main_menu_shows">Shows</string>
     <string name="main_menu_people">People</string>
@@ -15,10 +15,7 @@
     <string name="add_to_favorites_fab_description">Add to Favorites</string>
     <string name="favorite_shows_title">My Favorite Shows</string>
     <string name="people_query_hint">Search People</string>
-    <string name="settings_security">Security</string>
     <string name="settings_security_title">Protect with Password</string>
-    <string name="settings_security_summary">Security</string>
-    <string name="settings_about">About</string>
     <string name="about_neutral">View on Github</string>
     <string name="about_github_url" translatable="false">https://github.com/fvrodas/android_challenge_tv_series</string>
     <string name="enter_your_code">Enter your 6 digit code</string>
@@ -30,4 +27,7 @@
     <string name="biometric_needs_enrollment">"You should enroll at least 1 fingerprint or equivalent biometric authenticator."</string>
     <string name="alternative_auth">Use your 6 digit password</string>
     <string name="password_title">App Protection</string>
+    <string name="show_details_menu_share">Share</string>
+    <string name="share_string">Checkout this show: %s\n%s</string>
+    <string name="share_this_show">Share this show</string>
 </resources>

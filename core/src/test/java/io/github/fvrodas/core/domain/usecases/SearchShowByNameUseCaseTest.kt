@@ -14,7 +14,7 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class SearchShowByNameUseCaseTest {
     @Mock
-    private lateinit var repository: IShowsRepository;
+    private lateinit var repository: IShowsRepository
 
     private lateinit var useCase: SearchShowByNameUseCase
 
@@ -26,7 +26,7 @@ class SearchShowByNameUseCaseTest {
             poster = "https://testurl.com/-1/image.jpg",
             posterHQ = "https://testurl.com/-1/image.jpg",
             summary = "Test Summary",
-            genres = listOf("horror", "scifi"),
+            genres = listOf("horror", "sci-fi"),
             status = "ended",
             schedule = Schedule(time = "16:00", days = listOf("friday")),
             null

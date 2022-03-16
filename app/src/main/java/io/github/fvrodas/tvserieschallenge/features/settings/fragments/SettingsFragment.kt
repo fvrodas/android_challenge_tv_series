@@ -30,7 +30,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.preferences, rootKey)
 
-        passwordSwitch = findPreference<SwitchPreference>("protected_by_password")
+        passwordSwitch = findPreference("protected_by_password")
         passwordSwitch?.setOnPreferenceChangeListener { _, newValue ->
             if (newValue as Boolean) {
                 resultLauncher.launch(Intent(requireContext(), PasswordActivity::class.java).apply {

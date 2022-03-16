@@ -12,8 +12,6 @@ import io.github.fvrodas.tvserieschallenge.R
 import io.github.fvrodas.tvserieschallenge.databinding.ActivityMainBinding
 import io.github.fvrodas.tvserieschallenge.features.favorite_shows.fragments.FavoriteShowsFragment
 import io.github.fvrodas.tvserieschallenge.features.people.fragments.PeopleFragment
-import io.github.fvrodas.tvserieschallenge.features.security.activities.EXTRA_MODE
-import io.github.fvrodas.tvserieschallenge.features.security.activities.MODE_CREATION
 import io.github.fvrodas.tvserieschallenge.features.security.activities.PasswordActivity
 import io.github.fvrodas.tvserieschallenge.features.settings.fragments.SettingsFragment
 import io.github.fvrodas.tvserieschallenge.features.shows.fragments.ShowsFragment

@@ -1,10 +1,12 @@
 package io.github.fvrodas.tvserieschallenge.features.shows.activities
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.BackgroundColorSpan
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
@@ -30,6 +32,8 @@ class ShowDetailsActivity : AppCompatActivity() {
 
     private lateinit var viewBinding: ActivityShowDetailsBinding
 
+    private lateinit var show: ShowEntity
+
     private val viewModel: ShowDetailsViewModel by viewModel()
 
     private val episodesRecyclerViewAdapter = EpisodesRecyclerViewAdapter(object :
@@ -48,7 +52,7 @@ class ShowDetailsActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val show = intent.getSerializableExtra(EXTRA_SHOW) as ShowEntity
+        show = intent.getSerializableExtra(EXTRA_SHOW) as ShowEntity
 
         title = show.name
 
@@ -129,9 +133,27 @@ class ShowDetailsActivity : AppCompatActivity() {
         viewModel.retrieveShowDetailsById(show.id)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.show_details_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            onBackPressed()
+        when (item.itemId) {
+            android.R.id.home -> onBackPressed()
+            R.id.action_menu_share -> {
+                Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(
+                        Intent.EXTRA_TEXT,
+                        getString(R.string.share_string, show.name, show.url)
+                    )
+                    type = "text/plain"
+                }.also {
+                    startActivity(Intent.createChooser(it, getString(R.string.share_this_show)))
+                }
+
+            }
         }
         return super.onOptionsItemSelected(item)
     }

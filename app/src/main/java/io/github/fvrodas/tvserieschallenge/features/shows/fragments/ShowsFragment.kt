@@ -1,6 +1,7 @@
 package io.github.fvrodas.tvserieschallenge.features.shows.fragments
 
 import android.content.Intent
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -61,6 +62,9 @@ class ShowsFragment : Fragment() {
 
         viewBinding.showsRecyclerView.layoutManager = layoutManager
         viewBinding.showsRecyclerView.adapter = showRecyclerViewAdapter
+
+        viewBinding.includedToolbar.searchToolbar.background =
+            ColorDrawable(resources.getColor(R.color.teal_tv_maze, null))
 
         lifecycleScope.launch {
             viewModel.showsUiState.collect {
