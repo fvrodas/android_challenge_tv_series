@@ -14,7 +14,7 @@ import org.mockito.junit.MockitoJUnitRunner
 class GetListOfPeopleByPageNumberUseCaseTest {
 
     @Mock
-    private lateinit var repository: IPeopleRepository;
+    private lateinit var repository: IPeopleRepository
 
     private lateinit var useCase: GetListOfPeopleByPageNumberUseCase
 

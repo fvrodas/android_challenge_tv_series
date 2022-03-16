@@ -4,8 +4,8 @@
         <shape android:shape="rectangle">
             <gradient
                 android:angle="90"
-                android:endColor="@android:color/transparent"
-                android:centerColor="@color/dark_translucent"
+                android:endColor="@color/dark_translucent"
+                android:centerColor="@android:color/transparent"
                 android:startColor="@color/darker_translucent" />
             <size android:height="?attr/actionBarSize" />
         </shape>

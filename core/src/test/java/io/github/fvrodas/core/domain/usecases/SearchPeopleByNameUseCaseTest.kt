@@ -13,7 +13,7 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class SearchPeopleByNameUseCaseTest {
     @Mock
-    private lateinit var repository: IPeopleRepository;
+    private lateinit var repository: IPeopleRepository
 
     private lateinit var useCase: SearchPeopleByNameUseCase
 

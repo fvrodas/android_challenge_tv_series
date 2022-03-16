@@ -14,7 +14,7 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class GetShowDetailsByIdUseCaseTest {
     @Mock
-    private lateinit var repository: IShowsRepository;
+    private lateinit var repository: IShowsRepository
 
     private lateinit var useCase: GetShowDetailsByIdUseCase
 
@@ -25,7 +25,7 @@ class GetShowDetailsByIdUseCaseTest {
         poster = "https://testurl.com/-1/image.jpg",
         posterHQ = "https://testurl.com/-1/image.jpg",
         summary = "Test Summary",
-        genres = listOf("horror", "scifi"),
+        genres = listOf("horror", "sci-fi"),
         status = "ended",
         schedule = Schedule(time = "16:00", days = listOf("friday")),
         null
