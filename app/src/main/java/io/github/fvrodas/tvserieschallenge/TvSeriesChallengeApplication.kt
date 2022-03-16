@@ -6,6 +6,7 @@ import io.github.fvrodas.core.coreModule
 import io.github.fvrodas.tvserieschallenge.features.favorite_shows.viewmodels.FavoriteShowsViewModel
 import io.github.fvrodas.tvserieschallenge.features.people.viewmodels.PeopleViewModel
 import io.github.fvrodas.tvserieschallenge.features.people.viewmodels.PersonDetailsViewModel
+import io.github.fvrodas.tvserieschallenge.features.security.viewmodels.PasswordViewModel
 import io.github.fvrodas.tvserieschallenge.features.shows.viewmodels.ShowDetailsViewModel
 import io.github.fvrodas.tvserieschallenge.features.shows.viewmodels.ShowsViewModel
 import org.koin.android.ext.koin.androidContext
@@ -33,4 +34,5 @@ val appModule = module {
     viewModel { FavoriteShowsViewModel(get(), get()) }
     viewModel { PeopleViewModel(get(), get()) }
     viewModel { PersonDetailsViewModel(get(), get()) }
+    viewModel { PasswordViewModel(get()) }
 }

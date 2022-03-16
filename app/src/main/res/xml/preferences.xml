@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="Security">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="protected_by_password"
+            android:title="@string/settings_security_title" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="About the app">
+        <PreferenceScreen
+            android:divider="@android:drawable/divider_horizontal_dark"
+            android:summary="@string/about_github_url"
+            android:title="@string/about_neutral">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/about_github_url" />
+        </PreferenceScreen>
+
+        <PreferenceScreen
+            android:selectable="false"
+            android:summary="@string/app_version_name"
+            android:title="@string/app_name" />
+    </PreferenceCategory>
+</PreferenceScreen>
