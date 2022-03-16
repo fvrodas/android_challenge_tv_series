@@ -41,7 +41,7 @@
         android:id="@+id/pager_constraint_layout"
         android:layout_width="0dp"
         android:background="@drawable/page_view_background"
-        android:layout_height="@dimen/button_height"
+        android:layout_height="@dimen/pager_height"
         android:layout_marginBottom="@dimen/normal_margin"
         android:layout_marginHorizontal="@dimen/normal_margin"
         app:layout_constraintBottom_toBottomOf="parent"
