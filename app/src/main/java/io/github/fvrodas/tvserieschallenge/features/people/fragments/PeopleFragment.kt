@@ -1,6 +1,7 @@
-package io.github.fvrodas.tvserieschallenge.features.shows.fragments
+package io.github.fvrodas.tvserieschallenge.features.people.fragments
 
 import android.content.Intent
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,38 +11,39 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import io.github.fvrodas.core.domain.entities.ShowEntity
+import io.github.fvrodas.core.domain.entities.PersonEntity
 import io.github.fvrodas.tvserieschallenge.R
 import io.github.fvrodas.tvserieschallenge.databinding.ListFragmentBinding
-import io.github.fvrodas.tvserieschallenge.features.shows.activities.ShowDetailsActivity
-import io.github.fvrodas.tvserieschallenge.features.shows.adapters.ShowsRecyclerViewAdapter
-import io.github.fvrodas.tvserieschallenge.features.shows.viewmodels.PAGE_NONE
-import io.github.fvrodas.tvserieschallenge.features.shows.viewmodels.ShowsUiState
-import io.github.fvrodas.tvserieschallenge.features.shows.viewmodels.ShowsViewModel
+import io.github.fvrodas.tvserieschallenge.features.people.activities.PersonDetailsActivity
+import io.github.fvrodas.tvserieschallenge.features.people.viewmodels.PeopleUiState
+import io.github.fvrodas.tvserieschallenge.features.people.viewmodels.PeopleViewModel
+import io.github.fvrodas.tvserieschallenge.features.people.adapters.PeopleRecyclerViewAdapter
+import io.github.fvrodas.tvserieschallenge.features.people.viewmodels.PAGE_NONE
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 private const val SPAN_COUNT: Int = 3
 
-class ShowsFragment : Fragment() {
+class PeopleFragment : Fragment() {
 
     companion object {
-        fun newInstance() = ShowsFragment()
+        fun newInstance() = PeopleFragment()
     }
 
-    private val viewModel: ShowsViewModel by viewModel()
+    private val viewModel: PeopleViewModel by viewModel()
 
     private lateinit var viewBinding: ListFragmentBinding
 
-    private val showRecyclerViewAdapter = ShowsRecyclerViewAdapter(object :
-        ShowsRecyclerViewAdapter.Companion.ShowsRecyclerViewAdapterListener {
-        override fun onItemPressed(show: ShowEntity) {
-            Intent(requireContext(), ShowDetailsActivity::class.java).apply {
-                putExtra(ShowDetailsActivity.EXTRA_SHOW, show)
+    private val peopleRecyclerViewAdapter = PeopleRecyclerViewAdapter(object :
+        PeopleRecyclerViewAdapter.Companion.PeopleRecyclerViewAdapterListener {
+        override fun onItemPressed(person: PersonEntity) {
+            Intent(requireContext(), PersonDetailsActivity::class.java).apply {
+                putExtra(PersonDetailsActivity.EXTRA_PERSON, person)
                 startActivity(this)
             }
         }
+
     })
 
     override fun onCreateView(
@@ -60,22 +62,25 @@ class ShowsFragment : Fragment() {
             GridLayoutManager(requireContext(), SPAN_COUNT, GridLayoutManager.VERTICAL, false)
 
         viewBinding.showsRecyclerView.layoutManager = layoutManager
-        viewBinding.showsRecyclerView.adapter = showRecyclerViewAdapter
+        viewBinding.showsRecyclerView.adapter = peopleRecyclerViewAdapter
+
+        viewBinding.includedToolbar.searchToolbar.background =
+            ColorDrawable(resources.getColor(R.color.darker_gray, null))
 
         lifecycleScope.launch {
-            viewModel.showsUiState.collect {
+            viewModel.peopleUiState.collect {
                 when (it) {
-                    is ShowsUiState.Loading -> viewBinding.progressIndicator.visibility =
+                    is PeopleUiState.Loading -> viewBinding.progressIndicator.visibility =
                         View.VISIBLE
-                    is ShowsUiState.Success -> {
+                    is PeopleUiState.Success -> {
                         viewBinding.pagerConstraintLayout.visibility =
                             if (it.pageNumber == PAGE_NONE) View.GONE else View.VISIBLE
                         viewBinding.currentPageTextView.text =
                             getString(R.string.page_template, (it.pageNumber + 1))
                         viewBinding.progressIndicator.visibility = View.GONE
-                        showRecyclerViewAdapter.submitList(it.shows)
+                        peopleRecyclerViewAdapter.submitList(it.people)
                     }
-                    is ShowsUiState.Failure -> {
+                    is PeopleUiState.Failure -> {
                         viewBinding.progressIndicator.visibility = View.GONE
                         Toast.makeText(context, it.error, Toast.LENGTH_LONG)
                             .show()
@@ -85,7 +90,7 @@ class ShowsFragment : Fragment() {
         }
 
         viewBinding.includedToolbar.searchView.queryHint =
-            resources.getString(R.string.shows_query_hint)
+            resources.getString(R.string.people_query_hint)
 
         viewBinding.includedToolbar.searchView.setOnQueryTextListener(object :
             SearchView.OnQueryTextListener {

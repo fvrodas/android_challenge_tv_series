@@ -1,4 +1,4 @@
-package io.github.fvrodas.tvserieschallenge.features.favorite_shows.adapters
+package io.github.fvrodas.tvserieschallenge.features.people.adapters
 
 import android.net.Uri
 import android.view.LayoutInflater
@@ -8,14 +8,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import io.github.fvrodas.core.domain.entities.CrewCreditEntity
 import io.github.fvrodas.core.domain.entities.ShowEntity
 import io.github.fvrodas.tvserieschallenge.R
 import io.github.fvrodas.tvserieschallenge.databinding.ItemShowAltBinding
-import io.github.fvrodas.tvserieschallenge.databinding.ItemShowBinding
-import io.github.fvrodas.tvserieschallenge.features.shows.adapters.ShowsDiffUtils
 
-class FavoriteShowsRecyclerViewAdapter(private val listener: ShowsRecyclerViewAdapterListener) :
-    ListAdapter<ShowEntity, FavoriteShowViewHolder>(ShowsDiffUtils()) {
+class CrewCreditsListRecyclerViewAdapter(private val listener: CrewCreditsRecyclerViewAdapterListener) :
+    ListAdapter<CrewCreditEntity, FavoriteShowViewHolder>(CrewCreditsDiffUtils()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteShowViewHolder {
         return FavoriteShowViewHolder.create(parent)
@@ -27,10 +26,10 @@ class FavoriteShowsRecyclerViewAdapter(private val listener: ShowsRecyclerViewAd
             getItem(holder.adapterPosition - 1)
         } else null
         with(holder) {
-            viewBinding.letterTextview.text = item.name?.first().toString()
+            viewBinding.letterTextview.text = item.type
             previous?.let {
                 viewBinding.letterTextview.visibility =
-                    if (item.name?.first() != it.name?.first()) {
+                    if (item.type != it.type) {
                         View.VISIBLE
                     } else {
                         View.GONE
@@ -38,14 +37,13 @@ class FavoriteShowsRecyclerViewAdapter(private val listener: ShowsRecyclerViewAd
             } ?: kotlin.run {
                 viewBinding.letterTextview.visibility = View.VISIBLE
             }
-            item.poster?.let {
+            item.show?.poster?.let {
                 Glide.with(itemView).load(Uri.parse(it)).into(viewBinding.showPosterImageview)
             } ?: kotlin.run {
                 viewBinding.showPosterImageview.setImageResource(R.drawable.ic_shows)
             }
-            viewBinding.showTitleTextview.text = item.name
-            itemView.setOnClickListener { listener.onItemPressed(item) }
-            itemView.setOnLongClickListener { listener.onItemLongPressed(item) }
+            viewBinding.showTitleTextview.text = item.show?.name
+            itemView.setOnClickListener { listener.onItemPressed(item.show!!) }
         }
     }
 
@@ -57,11 +55,21 @@ class FavoriteShowsRecyclerViewAdapter(private val listener: ShowsRecyclerViewAd
     }
 
     companion object {
-        interface ShowsRecyclerViewAdapterListener {
+        interface CrewCreditsRecyclerViewAdapterListener {
             fun onItemPressed(show: ShowEntity)
-            fun onItemLongPressed(show: ShowEntity): Boolean
         }
     }
+}
+
+class CrewCreditsDiffUtils : DiffUtil.ItemCallback<CrewCreditEntity>() {
+    override fun areItemsTheSame(oldItem: CrewCreditEntity, newItem: CrewCreditEntity): Boolean {
+        return oldItem.show?.id == newItem.show?.id
+    }
+
+    override fun areContentsTheSame(oldItem: CrewCreditEntity, newItem: CrewCreditEntity): Boolean {
+        return oldItem == newItem
+    }
+
 }
 
 class FavoriteShowViewHolder(val viewBinding: ItemShowAltBinding) :

@@ -5,7 +5,8 @@
             <gradient
                 android:angle="90"
                 android:endColor="@android:color/transparent"
-                android:startColor="@color/black_translucent" />
+                android:centerColor="@color/dark_translucent"
+                android:startColor="@color/darker_translucent" />
             <size android:height="?attr/actionBarSize" />
         </shape>
     </item>
