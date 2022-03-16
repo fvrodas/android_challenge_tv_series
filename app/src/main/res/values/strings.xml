@@ -13,4 +13,5 @@
     <string name="main_menu_favorites">Favorites</string>
     <string name="add_to_favorites_fab_description">Add to Favorites</string>
     <string name="favorite_shows_title">My Favorite Shows</string>
+    <string name="people_query_hint">Search People</string>
 </resources>

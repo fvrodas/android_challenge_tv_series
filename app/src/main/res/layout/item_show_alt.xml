@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/letter_textview"
@@ -18,29 +18,35 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="A" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/show_poster_imageview"
-        android:layout_width="@dimen/button_height"
-        android:layout_height="?attr/listPreferredItemHeight"
-        android:layout_marginStart="@dimen/normal_margin"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/letter_textview" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/show_title_textview"
-        style="@style/Theme.TVSeriesChallenge.EpisodeTitle"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:orientation="horizontal"
         android:layout_width="0dp"
-        android:background="?attr/selectableItemBackground"
         android:layout_height="?attr/listPreferredItemHeight"
-        android:ellipsize="end"
-        android:gravity="center_vertical"
-        android:maxLines="2"
-        android:paddingHorizontal="@dimen/normal_margin"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="?attr/selectableItemBackground"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/show_poster_imageview"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/letter_textview"
-        tools:text="Test Title" />
+        >
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/show_poster_imageview"
+            android:layout_width="@dimen/button_height"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/normal_margin" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/show_title_textview"
+            style="@style/Theme.TVSeriesChallenge.EpisodeTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxLines="2"
+            android:paddingHorizontal="@dimen/normal_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/show_poster_imageview"
+            app:layout_constraintTop_toBottomOf="@id/letter_textview"
+            tools:text="Test Title" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

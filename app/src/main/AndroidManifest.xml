@@ -25,6 +25,10 @@
             android:name=".features.shows.activities.ShowDetailsActivity"
             android:exported="false"
             android:theme="@style/Theme.TVSeriesChallenge" />
+        <activity
+            android:name=".features.people.activities.PersonDetailsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.TVSeriesChallenge" />
     </application>
 
 </manifest>

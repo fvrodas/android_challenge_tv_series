@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.fvrodas.core.domain.entities.ShowEntity
 import io.github.fvrodas.tvserieschallenge.R
 import io.github.fvrodas.tvserieschallenge.databinding.FragmentFavoriteShowsBinding
-import io.github.fvrodas.tvserieschallenge.features.favorite_shows.adapters.FavoriteShowsRecyclerViewAdapter
+import io.github.fvrodas.tvserieschallenge.features.favorite_shows.adapters.FavoriteShowsListRecyclerViewAdapter
 import io.github.fvrodas.tvserieschallenge.features.favorite_shows.viewmodels.FavoriteShowsUiState
 import io.github.fvrodas.tvserieschallenge.features.favorite_shows.viewmodels.FavoriteShowsViewModel
 import io.github.fvrodas.tvserieschallenge.features.shows.activities.ShowDetailsActivity
@@ -31,8 +31,8 @@ class FavoriteShowsFragment : Fragment() {
 
     private val viewModel: FavoriteShowsViewModel by viewModel()
 
-    private val showRecyclerViewAdapter = FavoriteShowsRecyclerViewAdapter(object :
-        FavoriteShowsRecyclerViewAdapter.Companion.ShowsRecyclerViewAdapterListener {
+    private val showRecyclerViewAdapter = FavoriteShowsListRecyclerViewAdapter(object :
+        FavoriteShowsListRecyclerViewAdapter.Companion.FavoriteShowsRecyclerViewAdapterListener {
         override fun onItemPressed(show: ShowEntity) {
             Intent(requireContext(), ShowDetailsActivity::class.java).apply {
                 putExtra(ShowDetailsActivity.EXTRA_SHOW, show)

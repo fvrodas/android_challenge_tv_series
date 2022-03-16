@@ -22,7 +22,9 @@ class SearchPeopleByNameUseCaseTest {
             id = 1,
             name = "Test Person",
             gender = "Male",
-            image = null
+            image = null,
+            imageHQ = null,
+            shows = null
         )
     )
 

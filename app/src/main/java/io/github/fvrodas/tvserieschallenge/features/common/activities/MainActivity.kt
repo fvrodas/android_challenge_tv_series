@@ -7,6 +7,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import io.github.fvrodas.tvserieschallenge.R
 import io.github.fvrodas.tvserieschallenge.databinding.ActivityMainBinding
 import io.github.fvrodas.tvserieschallenge.features.favorite_shows.fragments.FavoriteShowsFragment
+import io.github.fvrodas.tvserieschallenge.features.people.fragments.PeopleFragment
 import io.github.fvrodas.tvserieschallenge.features.shows.fragments.ShowsFragment
 
 class MainActivity : AppCompatActivity() {
@@ -22,6 +23,15 @@ class MainActivity : AppCompatActivity() {
                 R.id.action_menu_shows -> {
                     supportFragmentManager.beginTransaction().apply {
                         replace(viewBinding.fragmentContainerView.id, ShowsFragment.newInstance())
+                        commit()
+                    }
+                }
+                R.id.action_menu_people -> {
+                    supportFragmentManager.beginTransaction().apply {
+                        replace(
+                            viewBinding.fragmentContainerView.id,
+                            PeopleFragment.newInstance()
+                        )
                         commit()
                     }
                 }

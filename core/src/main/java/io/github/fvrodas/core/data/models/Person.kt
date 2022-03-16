@@ -9,9 +9,15 @@ data class Person(
     val country: Country,
     val birthday: String,
     val deathday: Any? = null,
-    val gender: String,
+    val gender: String?,
     val image: Image?,
     val updated: Long
 ) : BaseResponse() {
-    fun asEntity(): PersonEntity = PersonEntity(id, name, gender, image)
+    fun asEntity(): PersonEntity = PersonEntity(
+        id,
+        name,
+        gender,
+        image?.medium,
+        image?.original,
+        _embedded?.shows?.map { it.asEntity() })
 }

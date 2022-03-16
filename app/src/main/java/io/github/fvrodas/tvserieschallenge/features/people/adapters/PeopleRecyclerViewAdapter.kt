@@ -1,4 +1,4 @@
-package io.github.fvrodas.tvserieschallenge.features.shows.adapters
+package io.github.fvrodas.tvserieschallenge.features.people.adapters
 
 import android.net.Uri
 import android.view.LayoutInflater
@@ -7,12 +7,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import io.github.fvrodas.core.domain.entities.ShowEntity
+import io.github.fvrodas.core.domain.entities.PersonEntity
 import io.github.fvrodas.tvserieschallenge.R
 import io.github.fvrodas.tvserieschallenge.databinding.ItemCardBinding
 
-class ShowsRecyclerViewAdapter(private val listener: ShowsRecyclerViewAdapterListener) :
-    ListAdapter<ShowEntity, ShowViewHolder>(ShowsDiffUtils()) {
+class PeopleRecyclerViewAdapter(private val listener: PeopleRecyclerViewAdapterListener) :
+    ListAdapter<PersonEntity, ShowViewHolder>(PeopleDiffUtils()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShowViewHolder {
         return ShowViewHolder.create(parent)
@@ -21,10 +21,10 @@ class ShowsRecyclerViewAdapter(private val listener: ShowsRecyclerViewAdapterLis
     override fun onBindViewHolder(holder: ShowViewHolder, position: Int) {
         val item = getItem(holder.adapterPosition)
         with(holder) {
-            item.poster?.let {
+            item.image?.let {
                 Glide.with(itemView).load(Uri.parse(it)).into(viewBinding.showPosterImageview)
             } ?: kotlin.run {
-                viewBinding.showPosterImageview.setImageResource(R.drawable.ic_shows)
+                viewBinding.showPosterImageview.setImageResource(R.drawable.ic_person)
             }
             viewBinding.showTitleTextview.text = item.name
             itemView.setOnClickListener { listener.onItemPressed(item) }
@@ -39,18 +39,18 @@ class ShowsRecyclerViewAdapter(private val listener: ShowsRecyclerViewAdapterLis
     }
 
     companion object {
-        interface ShowsRecyclerViewAdapterListener {
-            fun onItemPressed(show: ShowEntity)
+        interface PeopleRecyclerViewAdapterListener {
+            fun onItemPressed(person: PersonEntity)
         }
     }
 }
 
-class ShowsDiffUtils : DiffUtil.ItemCallback<ShowEntity>() {
-    override fun areItemsTheSame(oldItem: ShowEntity, newItem: ShowEntity): Boolean {
+class PeopleDiffUtils : DiffUtil.ItemCallback<PersonEntity>() {
+    override fun areItemsTheSame(oldItem: PersonEntity, newItem: PersonEntity): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: ShowEntity, newItem: ShowEntity): Boolean {
+    override fun areContentsTheSame(oldItem: PersonEntity, newItem: PersonEntity): Boolean {
         return oldItem == newItem
     }
 
