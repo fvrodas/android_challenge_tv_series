@@ -17,8 +17,13 @@ class RemoteShowsRepository(
     override suspend fun getSeriesListByPageNumber(pageNumber: Long): Result<List<ShowEntity>> {
         return withContext(coroutineDispatcher) {
             try {
-                return@withContext Result.success(
-                    dataSource.getListOfShowsByPageNumber(pageNumber).map { it.asEntity() })
+                return@withContext if (showsCache.containsKey(pageNumber) && showsCache[pageNumber] != null) {
+                    Result.success(showsCache[pageNumber]!!)
+                } else {
+                    showsCache[pageNumber] =
+                        dataSource.getListOfShowsByPageNumber(pageNumber).map { it.asEntity() }
+                    Result.success(showsCache[pageNumber]!!)
+                }
             } catch (e: Exception) {
                 if (BuildConfig.DEBUG) {
                     Log.d(this::class.java.canonicalName, e.message ?: "")
@@ -45,7 +50,12 @@ class RemoteShowsRepository(
     override suspend fun getSeriesDetailByID(ID: Long): Result<ShowEntity> {
         return withContext(coroutineDispatcher) {
             try {
-                return@withContext Result.success(dataSource.getShowDetailsById(ID).asEntity())
+                return@withContext if (showDetailsCache.containsKey(ID) && showDetailsCache.isNotEmpty()) {
+                    Result.success(showDetailsCache[ID]!!)
+                } else {
+                    showDetailsCache[ID] = dataSource.getShowDetailsById(ID).asEntity()
+                    Result.success(showDetailsCache[ID]!!)
+                }
             } catch (e: Exception) {
                 if (BuildConfig.DEBUG) {
                     Log.d(this::class.java.canonicalName, e.message ?: "")
@@ -55,3 +65,6 @@ class RemoteShowsRepository(
         }
     }
 }
+
+private val showsCache: HashMap<Long, List<ShowEntity>> = HashMap()
+private val showDetailsCache: HashMap<Long, ShowEntity> = HashMap()

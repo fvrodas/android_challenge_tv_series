@@ -54,6 +54,7 @@
                 android:id="@+id/genres_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:background="@color/darker_gray"
                 android:padding="@dimen/normal_margin"
                 android:textColor="@color/lighter_gray" />
@@ -63,6 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/darker_teal"
+                android:visibility="gone"
                 android:padding="@dimen/normal_margin"
                 android:textColor="@color/lighter_gray" />
 
@@ -71,6 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/darker_gray"
+                android:visibility="gone"
                 android:padding="@dimen/normal_margin"
                 android:textColor="@color/lighter_gray" />
 
@@ -79,7 +82,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:indeterminate="true"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="center"
                 android:visibility="gone"
                 app:indicatorColor="@color/darker_teal"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -89,6 +92,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/episodes_recyclerview"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 

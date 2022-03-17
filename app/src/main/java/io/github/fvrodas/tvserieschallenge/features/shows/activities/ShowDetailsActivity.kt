@@ -77,8 +77,6 @@ class ShowDetailsActivity : AppCompatActivity() {
                     is ShowDetailsUiState.Loading -> viewBinding.progressIndicator.visibility =
                         View.VISIBLE
                     is ShowDetailsUiState.Success -> {
-                        viewBinding.progressIndicator.visibility =
-                            View.GONE
                         it.shows.genres?.let { g ->
                             val spannableStringBuilder = SpannableStringBuilder()
                             g.forEach { s ->
@@ -115,6 +113,12 @@ class ShowDetailsActivity : AppCompatActivity() {
                             episodesRecyclerViewAdapter.submitList(episodes)
                         }
 
+                        viewBinding.progressIndicator.visibility =
+                            View.GONE
+                        viewBinding.genresTextview.visibility = View.VISIBLE
+                        viewBinding.summaryTextview.visibility = View.VISIBLE
+                        viewBinding.scheduleTextview.visibility = View.VISIBLE
+                        viewBinding.episodesRecyclerview.visibility = View.VISIBLE
                     }
                     is ShowDetailsUiState.Message -> {
                         viewBinding.progressIndicator.visibility =
